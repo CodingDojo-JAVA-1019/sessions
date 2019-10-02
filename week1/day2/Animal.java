@@ -1,5 +1,5 @@
 
-public class Animal {
+public abstract class Animal implements IAnimal {
   protected int numberOfLegs;
   private String type;
 

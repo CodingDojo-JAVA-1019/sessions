@@ -1,7 +1,7 @@
 
 public class Test {
   public static void main(String[] args) {
-    Animal animal = new Animal();
+    Horse animal = new Horse();
     Fox fox = new Fox("Fox");
     Cat cat = new Cat("Cat", 3);
 
@@ -11,7 +11,7 @@ public class Test {
 
     animal.setNumberOfLegs(-777);
 
-    animal.setType("Horse");
+    animal.setType("Cat");
 
     System.out.println(animal.getNumberOfLegs());
     System.out.println(animal.getType());
@@ -19,6 +19,16 @@ public class Test {
     cat.run();
     System.out.println(cat.getNumberOfLegs());
 
-    // animal.run();
+    // cat.makeSound();?
+    // fox.makeSound()
+    Human human = new Human();
+    Parrot parrot = new Parrot();
+
+    Trainer.train(fox);
+    Trainer.train(cat);
+    Trainer.train(animal);
+    Trainer.train(human);
+    // Trainer.train((IAnimal) parro
+
   }
 }
