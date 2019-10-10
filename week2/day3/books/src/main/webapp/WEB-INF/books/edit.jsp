@@ -1,6 +1,9 @@
+<%@ page isErrorPage="true" %>   
+<!--  -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <!--  -->
+
   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
   <!--  -->
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%> 
@@ -8,11 +11,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Create Book</title>
+<title>Edit Book</title>
 </head>
 <body>
-	<main>		
-		<nav>
+
+	<nav>
 		<ul>
 			<li><a href="/books">Books</a></li>
 			<li><a href="/books/new">Create Book</a></li>
@@ -20,10 +23,12 @@
 	</nav>
 		<section>
 			<fieldset>
-				<legend>Create Book</legend>
+				<legend>Edit Book</legend>
 				
 				
-				<form:form action="/books" method="POST" modelAttribute="book" autocomplete="off">
+				<form:form action="/books/${ book.id }" method="POST" modelAttribute="book" autocomplete="off">
+					<input type="hidden" name="_method" value="put">
+					<form:hidden path="id" />
 				    <div>
 				        <form:label path="title">Title</form:label>
 				        <form:input path="title"/>
@@ -48,6 +53,5 @@
 				</form:form>    
 			</fieldset>
 		</section>
-	</main>
 </body>
 </html>

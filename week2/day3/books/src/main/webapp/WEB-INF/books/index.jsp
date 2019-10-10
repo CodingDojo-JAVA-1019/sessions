@@ -17,7 +17,7 @@
 	</nav>
 
 	<h1>Books</h1>
-	
+	<p>${error }</p>
 	<section>
 	
 		<table>
@@ -33,10 +33,10 @@
 			<tbody>
 				<c:forEach var="book" items="${ books }">
 					<tr>
-						<td> ${ book.title }</td>
+						<td><a href="/books/${ book.id }">${ book.title }</a></td>
 						<td> ${ book.pages }</td>
 						<td>Eventual Author</td>
-						<td>Future Actions</td>
+						<td><a href="/books/${ book.id }/edit">Edit Book</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

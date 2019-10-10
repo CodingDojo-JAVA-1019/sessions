@@ -67,6 +67,7 @@ public class BookController {
 	public String show(@PathVariable("id") Long id, Model model, RedirectAttributes redirectAttrs) {
 		Book book = bookService.findById(id);
 		
+		System.out.println("Finding book with id " + id);
 		
 		if (book == null) {
 			redirectAttrs.addFlashAttribute("error", "Could not find book using id " + id);
@@ -76,5 +77,35 @@ public class BookController {
 		model.addAttribute("book", book);
 		
 		return "books/show.jsp";
+	}
+	
+	// update a resource (book)
+	@RequestMapping(value="/{id}", method=RequestMethod.PUT) // /books/1 (id)
+	public String update(@PathVariable("id") Long id, @Valid @ModelAttribute("book") Book book, BindingResult result) {
+		final String page = result.hasErrors() ? "books/edit.jsp" : "redirect:/books/" + id; 
+		
+		System.out.println("Updating book with id " + id);
+		
+		if (!result.hasErrors()) {
+			bookService.update(book);			
+		}
+		
+		return page;
+	}
+	
+	@RequestMapping("/{id}/edit")
+	public String edit(@PathVariable("id") Long id, Model model, RedirectAttributes redirectAttrs) {
+		Book book = bookService.findById(id);
+		
+		if (book == null) {
+			redirectAttrs.addFlashAttribute("error", "Could not find book using id " + id);
+			return "redirect:/books";
+		}
+		
+		System.out.println("Editing book " + book.getTitle());
+		
+		model.addAttribute("book", book);
+		
+		return "books/edit.jsp";
 	}
 }
