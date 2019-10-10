@@ -42,5 +42,30 @@ int j = 234;
 	
 </section>
 
+
+<section>
+	<fieldset>
+		<legend>Names</legend>
+	
+	<form action="/Howdy/Hello" method="POST" autocomplete="off">
+		<div>
+			<label>Name</label>
+			<input type="text" name="name">
+		</div>
+		<div>
+			<label>Age</label>
+			<input type="number" name="age" min="1" max="99">
+		</div>
+		<button>Submit</button>
+	</form>
+	</fieldset>
+</section>
+
+
+
+
+
+
+
 </body>
 </html>

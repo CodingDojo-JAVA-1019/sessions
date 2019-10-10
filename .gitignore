@@ -68,6 +68,7 @@ CMakeSettings.json
 /Debug/
 /Release/
 .DS_Store
+/**/.DS_Store
 *.dSYM
 ._*
 *.mode1v3
