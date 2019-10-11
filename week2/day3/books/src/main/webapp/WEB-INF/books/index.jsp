@@ -7,8 +7,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Books</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
 </head>
-<body>
+<body class='container'>
 	<nav>
 		<ul>
 			<li><a href="/books">Books</a></li>
@@ -20,7 +21,7 @@
 	<p>${error }</p>
 	<section>
 	
-		<table>
+		<table class='table table-striped'>
 			<thead>
 				<tr>
 					<th>Title</th>
