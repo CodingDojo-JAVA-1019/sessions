@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -51,6 +52,16 @@ public class AuthorController {
 		}
 		
 		return page;
+	}
+	
+	@GetMapping("/{id}")
+	public String show(@PathVariable("id") Long id, Model model) {
+		System.out.println("Getting author");
+		Author author = authorService.findById(id);
+		
+		model.addAttribute("author", author);
+		
+		return "authors/show.jsp";
 	}
 	
 }

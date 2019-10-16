@@ -1,8 +1,6 @@
 package com.codingdojo.books.models;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,38 +10,32 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
-import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name="books")
-public class Book {
+@Table(name="reviews")
+public class Review {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	@Size(min=2, max=20)
-	private String title;
-	
-	@Min(1)
-	private Integer pages;
-	
-	private String publisher;
-	
-	private String description;
+	@NotNull
+	@Size(min=10)
+	private String content;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="author_id")
-	private Author author;
+	@JoinColumn(name="user_id")
+	private User user;
 	
-	@OneToMany(mappedBy="book", fetch=FetchType.LAZY)
-	private List<Review> reviews = new ArrayList<Review>();
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="book_id")
+	private Book book;
 	
 	@Column(updatable=false)
 	@DateTimeFormat(pattern="yyyy-MM-dd")
@@ -51,59 +43,54 @@ public class Book {
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date updatedAt;
 	
-	public Book() {}
+	
+	public Review() {}
+
 
 	public Long getId() {
 		return id;
 	}
 
+
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public String getTitle() {
-		return title;
+
+	public String getContent() {
+		return content;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+
+	public void setContent(String content) {
+		this.content = content;
 	}
 
-	public Integer getPages() {
-		return pages;
+
+	public User getUser() {
+		return user;
 	}
 
-	public void setPages(Integer pages) {
-		this.pages = pages;
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
-	public String getPublisher() {
-		return publisher;
+
+	public Book getBook() {
+		return book;
 	}
 
-	public void setPublisher(String publisher) {
-		this.publisher = publisher;
+
+	public void setBook(Book book) {
+		this.book = book;
 	}
 
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public Author getAuthor() {
-		return author;
-	}
-
-	public void setAuthor(Author author) {
-		this.author = author;
-	}
 
 	public Date getCreatedAt() {
 		return createdAt;
 	}
+
 
 	public Date getUpdatedAt() {
 		return updatedAt;
@@ -118,5 +105,4 @@ public class Book {
 	protected void onUpdate() {
 		updatedAt = new Date();
 	}
-	
 }

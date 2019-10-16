@@ -16,10 +16,12 @@
 </head>
 <body>
 
-	<nav>
-		<ul>
-			<li><a href="/books">Books</a></li>
-			<li><a href="/books/new">Create Book</a></li>
+	<nav class='navbar navbar-expand-xl'>
+		<ul class='navbar-nav'>
+			<li class='navbar-item'><a href="/authors" class='navbar-link'>Authors</a></li>
+			<li class='navbar-item'><a href="/authors/new" class='navbar-link'>Create Author</a></li>
+			<li class='navbar-item'><a href="/books" class='navbar-link'>Books</a></li>
+			<li class='navbar-item'><a href="/books/new" class='navbar-link'>Create Book</a></li>
 		</ul>
 	</nav>
 		<section>
@@ -49,7 +51,11 @@
 				        <form:label path="pages">Pages</form:label>
 				        <form:errors path="pages"/>     
 				        <form:input type="number" path="pages"/>
-				    </div>    
+				    </div>
+				    <div class='form-group'>
+				    	<form:label path='author'>Author</form:label>
+				    	<form:select path='author' required='true' items='${ authors }' itemValue='id' itemLabel='name'></form:select>
+				    </div>
 				    <input type="submit" value="Submit"/>
 				</form:form>    
 			</fieldset>

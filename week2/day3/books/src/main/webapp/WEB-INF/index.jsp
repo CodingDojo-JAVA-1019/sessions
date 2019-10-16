@@ -34,7 +34,7 @@
 						<form:label path="email">Email</form:label>
 						<form:input path="email" type="email" required="true" />
 					</div>
-										<div>
+					<div>
 						<form:label path="password">Password</form:label>
 						<form:input path="password" type="password" required="true" />
 					</div>
@@ -46,6 +46,30 @@
 				</form:form>
 			</fieldset>
 		</section>
+		
+		<section>
+			<h2>Login</h2>
+			<p>${ error }</p>
+			<fieldset>
+				<form:form 
+					action="/sessions/login"
+					method="post"
+					autocomplete="off"
+				>
+					<div>
+						<label>Email</label>
+						<input type="email" name="email">
+					</div>
+					
+					<div>
+						<label>Password</label>
+						<input type="password" name="password">
+					</div>
+					<button>Login</button>
+				</form:form>
+			</fieldset>
+		</section>
+		
 	</main>
 </body>
 </html>

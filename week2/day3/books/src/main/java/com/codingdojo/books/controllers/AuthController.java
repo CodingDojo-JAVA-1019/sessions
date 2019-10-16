@@ -50,8 +50,7 @@ public class AuthController {
 	@PostMapping("/login")
 	public String login(@RequestParam("email") String email, @RequestParam("password") String password, HttpSession session, RedirectAttributes redirectAttrs) {
 		if (!auth.authenticate(email, password)) {
-			redirectAttrs.addAttribute("error", "email/password combo not found");
-			
+			redirectAttrs.addFlashAttribute("error", "email/password combo not found");
 			return "redirect:/";
 		}
 		

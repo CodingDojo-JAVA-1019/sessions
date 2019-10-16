@@ -1,12 +1,16 @@
 package com.codingdojo.books.models;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -37,6 +41,9 @@ public class User {
 	@Transient
 	private String passwordConfirmation;
 	
+	@OneToMany(mappedBy="user", fetch=FetchType.LAZY)
+	private List<Review> reviews = new ArrayList<Review>();
+	
 	
 	@Column(updatable=false)
 	@DateTimeFormat(pattern="yyyy-MM-dd")
@@ -45,6 +52,14 @@ public class User {
 	private Date updatedAt;
 	
 	public User() {}
+
+	public List<Review> getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
+	}
 
 	public Long getId() {
 		return id;

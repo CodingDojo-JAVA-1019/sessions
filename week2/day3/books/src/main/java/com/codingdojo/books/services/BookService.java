@@ -48,4 +48,12 @@ public class BookService {
 	public Book update(Book book) {
 		return bookRepo.save(book);
 	}
+	
+	
+	public void removeBook(Book book) {
+		bookRepo.delete(book);
+	}
+	public void removeBook(Long id) {
+		bookRepo.deleteById(id);
+	}
 }

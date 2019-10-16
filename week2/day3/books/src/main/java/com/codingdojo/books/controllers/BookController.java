@@ -13,16 +13,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.codingdojo.books.models.Author;
 import com.codingdojo.books.models.Book;
+import com.codingdojo.books.services.AuthorService;
 import com.codingdojo.books.services.BookService;
 
 @Controller
 @RequestMapping("/books")
 public class BookController {
-	
+	private final AuthorService authorService;
 	private final BookService bookService;
 	
-	public BookController(BookService bookService) {
+	public BookController(BookService bookService, AuthorService authorService) {
+		this.authorService = authorService;
 		this.bookService = bookService;
 	}
 	
@@ -43,7 +46,9 @@ public class BookController {
 	
 	// displays form to create new resource (book)
 	@RequestMapping("/new") // books/new
-	public String newBook(@ModelAttribute("book") Book book) {
+	public String newBook(@ModelAttribute("book") Book book, Model model) {
+		List<Author> authors = authorService.findAll();
+		model.addAttribute("authors", authors);
 		return "books/new.jsp";
 	}
 	
@@ -102,10 +107,20 @@ public class BookController {
 			return "redirect:/books";
 		}
 		
+		
+		List<Author> authors = authorService.findAll();
 		System.out.println("Editing book " + book.getTitle());
 		
 		model.addAttribute("book", book);
+		model.addAttribute("authors", authors);
 		
 		return "books/edit.jsp";
+	}
+	
+	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
+	public String destroy(@PathVariable("id") Long id) {
+		bookService.removeBook(id);
+		
+		return "redirect:/books";
 	}
 }
